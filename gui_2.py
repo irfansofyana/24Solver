@@ -3,8 +3,6 @@ from tkinter import *
 from random import *
 import tkinter.messagebox
 
-# global cards
-
 def new():
     print("New")
 
@@ -16,18 +14,53 @@ def quit():
 def howtouse():
     print("How to use")
 
+def shuffledeck():
+    shuffle(cardsdeck)
+
 def newround():
-    # global bil
-    # global cards
     if (len(cardsdeck) == 0):
         print("Abis gan")
     else:
-        shuffledeck()
-        updatebil()
+        shuffledeck()    
+        cards = [cardsdeck[0],cardsdeck[1],cardsdeck[2],cardsdeck[3]]
+        cardsdeck.remove(cards[0])
+        cardsdeck.remove(cards[1])
+        cardsdeck.remove(cards[2])
+        cardsdeck.remove(cards[3])
+        print(cards)
+        Solve([getcardvalue(cards[0]),getcardvalue(cards[1]),getcardvalue(cards[2]),getcardvalue(cards[3])])
         updatecards(cards[0], 0)
         updatecards(cards[1], 1)
         updatecards(cards[2], 2)
         updatecards(cards[3], 3)
+
+def getcardvalue(a):
+    if(a[0] == 'A'):
+        return(1)
+    elif(a[0] == '2'):
+        return(2)
+    elif(a[0] == '3'):
+        return(3)
+    elif(a[0] == '4'):
+        return(4)
+    elif(a[0] == '5'):
+        return(5)
+    elif(a[0] == '6'):
+        return(6)
+    elif(a[0] == '7'):
+        return(7)
+    elif(a[0] == '8'):
+        return(8)
+    elif(a[0] == '9'):
+        return(9)
+    elif(a[0] == '1'):
+        return(10)
+    elif(a[0] == 'J'):
+        return(11)
+    elif(a[0] == 'Q'):
+        return(12)
+    elif(a[0] == 'K'):
+        return(13)
 
 def updatecards(a,b):
     stringz = "cards_png/"+a+".png"
@@ -36,18 +69,27 @@ def updatecards(a,b):
         image1label.configure(image=gambar)
         image1label.image = gambar
         num1.config(text = getcardvalue(a))
+        op1.config(text = solution[0])
     elif(b == 1):
         image2label.configure(image=gambar)
         image2label.image = gambar
         num2.config(text = getcardvalue(a))
+        op2.config(text = solution[1])
     elif(b == 2):
         image3label.configure(image=gambar)
         image3label.image = gambar
         num3.config(text = getcardvalue(a))
+        op3.config(text = solution[2])
     elif(b == 3):
         image4label.configure(image=gambar)
         image4label.image = gambar
         num4.config(text = getcardvalue(a))
+
+
+cardsdeck = ['2D','2C','2H','2S','3D','3C','3H','3S','4D','4C','4H','4S','5D','5C','5H','5S',
+             '6D','6C','6H','6S','7D','7C','7H','7S','8D','8C','8H','8S','9D','9C','9H','9S',
+             '10D','10C','10H','10S','AD','AC','AH','AS','JD','JC','JH','JS','QD','QC','QH','QS',
+             'KD','KC','KH','KS']
 
 root = Tk()
 tkinter.messagebox.showinfo('Welcome','Masuk Gan')

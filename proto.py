@@ -22,6 +22,7 @@ def PrintSolution(bil, solution):
 	
 
 def Solve(bil):
+	# solution = []
 	bil.sort(reverse = True)
 	if (Diff(bil[0]+bil[1]) <= Diff(bil[0]*bil[1])):
 		#+ _ _
@@ -103,10 +104,10 @@ def Solve(bil):
 		else:
 			PrintSolution(bil, solution)
 
-
-print("Masukan 4 bilangan: ", end=" ")
-bil = [int(x) for x in input().split()]
-Solve(bil)
+def updatebil():
+	# print("Masukan 4 bilangan: ", end=" ")
+	bil = [int(x) for x in input().split()]
+	Solve(bil)
 
 #Langkah-langkah greedy:
 #Strategi greedy : Pilih operator yang menghasilkan nilai sedekat mungkin dengan 24
