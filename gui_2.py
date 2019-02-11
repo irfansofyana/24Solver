@@ -3,6 +3,15 @@ from tkinter import *
 from random import *
 import tkinter.messagebox
 
+
+import simpleaudio as sa
+
+wave_obj = sa.WaveObject.from_wave_file("shuffling-cards-1.wav")
+
+
+global sol
+global bil
+
 def new():
     print("New")
 
@@ -18,17 +27,25 @@ def shuffledeck():
     shuffle(cardsdeck)
 
 def newround():
+    global bil
+    global sol
     if (len(cardsdeck) == 0):
         print("Abis gan")
     else:
-        shuffledeck()    
+        shuffledeck()   
+        play_obj = wave_obj.play()
+        # play_obj.wait_done() 
         cards = [cardsdeck[0],cardsdeck[1],cardsdeck[2],cardsdeck[3]]
         cardsdeck.remove(cards[0])
         cardsdeck.remove(cards[1])
         cardsdeck.remove(cards[2])
         cardsdeck.remove(cards[3])
         print(cards)
-        Solve([getcardvalue(cards[0]),getcardvalue(cards[1]),getcardvalue(cards[2]),getcardvalue(cards[3])])
+        sol = []
+        bil = [getcardvalue(cards[0]),getcardvalue(cards[1]),getcardvalue(cards[2]),getcardvalue(cards[3])]
+        bil.sort(reverse=True)
+        Solve(bil, sol)
+        numhasil.config(text=sol[3])
         updatecards(cards[0], 0)
         updatecards(cards[1], 1)
         updatecards(cards[2], 2)
@@ -63,27 +80,28 @@ def getcardvalue(a):
         return(13)
 
 def updatecards(a,b):
+    global sol
     stringz = "cards_png/"+a+".png"
     gambar = PhotoImage(file=stringz)
     if(b == 0):
         image1label.configure(image=gambar)
         image1label.image = gambar
-        num1.config(text = getcardvalue(a))
-        op1.config(text = solution[0])
+        num1.config(text = bil[0])
+        op1.config(text = sol[0])
     elif(b == 1):
         image2label.configure(image=gambar)
         image2label.image = gambar
-        num2.config(text = getcardvalue(a))
-        op2.config(text = solution[1])
+        num2.config(text = bil[1])
+        op2.config(text = sol[1])
     elif(b == 2):
         image3label.configure(image=gambar)
         image3label.image = gambar
-        num3.config(text = getcardvalue(a))
-        op3.config(text = solution[2])
+        num3.config(text = bil[2])
+        op3.config(text = sol[2])
     elif(b == 3):
         image4label.configure(image=gambar)
         image4label.image = gambar
-        num4.config(text = getcardvalue(a))
+        num4.config(text = bil[3])
 
 
 cardsdeck = ['2D','2C','2H','2S','3D','3C','3H','3S','4D','4C','4H','4S','5D','5C','5H','5S',
@@ -127,38 +145,41 @@ imagebacklabel = Label(bodyframe, image=imageback, height=200, width=131)
 imagebacklabel.grid(row=0, column=6, pady=20, padx=20)
 
 image1label = Label(bodyframe, image=image1, height=200, width=131)
-image1label.grid(row=1,column=0, pady=20, padx=20)
+image1label.grid(row=3,column=0, pady=20, padx=20, rowspan=3)
 
 image2label = Label(bodyframe, image=image2, height=200, width=131)
-image2label.grid(row=1,column=2, pady=20, padx=20)
+image2label.grid(row=3,column=2, pady=20, padx=20, rowspan=3)
 
 image3label = Label(bodyframe, image=image3, height=200, width=131)
-image3label.grid(row=1,column=4, pady=20, padx=20)
+image3label.grid(row=3,column=4, pady=20, padx=20, rowspan=3)
 
 image4label = Label(bodyframe, image=image4, height=200, width=131)
-image4label.grid(row=1,column=6, pady=20, padx=20)
+image4label.grid(row=3,column=6, pady=20, padx=20, rowspan=3)
 
 #Label in Display (row 2)
 num1 = Label(bodyframe, text="_")
 num1.grid(row=2, column=0)
 
 op1 = Label(bodyframe, text="_")
-op1.grid(row=2, column=1)
+op1.grid(row=4, column=1)
 
 num2 = Label(bodyframe, text="_")
 num2.grid(row=2, column=2)
 
 op2 = Label(bodyframe, text="_")
-op2.grid(row=2, column=3)
+op2.grid(row=4, column=3)
 
 num3 = Label(bodyframe, text="_")
 num3.grid(row=2, column=4)
 
 op3 = Label(bodyframe, text="_")
-op3.grid(row=2, column=5)
+op3.grid(row=4, column=5)
 
 num4 = Label(bodyframe, text="_")
 num4.grid(row=2, column=6)
+
+numhasil = Label(bodyframe, text="_")
+numhasil.grid(row=6, column=2, columnspan=3)
 
 
 #***** Status Bar *****

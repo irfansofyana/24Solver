@@ -18,10 +18,11 @@ def PrintSolution(bil, solution):
 		else:
 			tmp = tmp + str(bil[3])
 			print(bil[3])
+	solution.append(str(eval(tmp)))
 	print(eval(tmp))
 	
 
-def Solve(bil):
+def Solve(bil,solution):
 	# solution = []
 	bil.sort(reverse = True)
 	if (Diff(bil[0]+bil[1]) <= Diff(bil[0]*bil[1])):
@@ -99,6 +100,7 @@ def Solve(bil):
 			if (prv == 0 or prv == 1):
 				print("(", bil[0], solution[0], bil[1], solution[1], bil[2], ")", solution[2], bil[3])
 				print(eval("("+str(bil[0])+solution[0]+str(bil[1])+solution[1]+str(bil[2])+")"+solution[2]+str(bil[3])))
+				solution.append(str(eval("("+str(bil[0])+solution[0]+str(bil[1])+solution[1]+str(bil[2])+")"+solution[2]+str(bil[3]))))
 			else:
 				PrintSolution(bil, solution)
 		else:
