@@ -21,7 +21,7 @@ def quit():
         root.quit()
 
 def howtouse():
-    print("How to use")
+    print("Klik tombol shuffle untuk mengambil set kartu baru")
 
 def shuffledeck():
     shuffle(cardsdeck)
@@ -180,6 +180,9 @@ num4.grid(row=2, column=6)
 
 numhasil = Label(bodyframe, text="_")
 numhasil.grid(row=6, column=2, columnspan=3)
+
+shufflebutton = Button(bodyframe, text="Shuffle", command=newround)
+shufflebutton.grid(row=0, column=2, columnspan=3)
 
 
 #***** Status Bar *****

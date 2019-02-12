@@ -20,7 +20,6 @@ def PrintSolution(bil, solution):
 			print(bil[3])
 	solution.append(str(eval(tmp)))
 	print(eval(tmp))
-	
 
 def Solve(bil,solution):
 	# solution = []
@@ -105,11 +104,6 @@ def Solve(bil,solution):
 				PrintSolution(bil, solution)
 		else:
 			PrintSolution(bil, solution)
-
-def updatebil():
-	# print("Masukan 4 bilangan: ", end=" ")
-	bil = [int(x) for x in input().split()]
-	Solve(bil)
 
 #Langkah-langkah greedy:
 #Strategi greedy : Pilih operator yang menghasilkan nilai sedekat mungkin dengan 24
